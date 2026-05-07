@@ -1,0 +1,11 @@
+{
+  "python.defaultInterpreterPath": "C:\\Program Files\\Python313\\python.exe",
+  "python.analysis.extraPaths": [
+    "C:\\Users\\saidn\\AppData\\Roaming\\Python\\Python313\\site-packages",
+    "C:\\Program Files\\Python313\\Lib\\site-packages"
+  ],
+  "python.analysis.typeCheckingMode": "off",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  }
+}

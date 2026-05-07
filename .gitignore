@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.expo/
+dist/
+web-build/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+/tmp/
+
+# Android/iOS builds
+*.apk
+*.aab
+*.bundle
+*.ipa
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# App Data
+Documents/CourEditer/uploads/
+Documents/CourEditer/outputs/
+mobile-backend/uploads/
+mobile-backend/outputs/
+
+# Config
+.env
