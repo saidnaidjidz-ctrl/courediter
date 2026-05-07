@@ -17,8 +17,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Use /tmp for cloud environments (like Railway/Render)
-BASE_DIR = Path("/tmp/CourEditer")
+# Adaptive storage paths (Cloud vs Local)
+if os.environ.get("RAILWAY_ENVIRONMENT") or os.environ.get("RENDER") or os.name != 'nt':
+    # Cloud environments or Linux (Docker)
+    BASE_DIR = Path("/tmp/CourEditer")
+else:
+    # Local Windows development
+    BASE_DIR = Path(__file__).parent / "data"
+
 UPLOAD_DIR = BASE_DIR / "uploads"
 OUTPUT_DIR = BASE_DIR / "outputs"
 
@@ -110,7 +116,7 @@ async def generate_pdf(
         return JSONResponse(status_code=500, content={"success": False, "error": str(e)})
 
 @app.get("/api/download/{filename}")
-async def download_file(filename: string):
+async def download_file(filename: str):
     file_path = OUTPUT_DIR / filename
     if file_path.exists():
         return FileResponse(path=str(file_path), filename=filename, media_type='application/pdf')

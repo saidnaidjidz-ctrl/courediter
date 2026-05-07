@@ -7,10 +7,14 @@ from fastapi import FastAPI, File, UploadFile, Form
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-# ======================================================
-# Cloud Storage Paths
-# ======================================================
-DATA_DIR = Path("/tmp/CourEditer")
+# Adaptive storage paths (Cloud vs Local)
+if os.environ.get("RAILWAY_ENVIRONMENT") or os.environ.get("RENDER") or os.name != 'nt':
+    # Cloud environments or Linux (Docker)
+    DATA_DIR = Path("/tmp/CourEditer")
+else:
+    # Local Windows development
+    DATA_DIR = Path(__file__).parent / "data"
+
 UPLOAD_DIR = DATA_DIR / "uploads"
 OUTPUT_DIR = DATA_DIR / "outputs"
 

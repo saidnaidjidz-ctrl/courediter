@@ -116,7 +116,8 @@ export default function HomeScreen() {
 
         Alert.alert('نجاح', 'تم إنشاء الشبكة بنجاح!');
       } else {
-        Alert.alert('خطأ', data.error || 'حدث خطأ غير معروف');
+        const errorMsg = data.error || data.detail || 'حدث خطأ غير معروف';
+        Alert.alert('خطأ', typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
       }
     } catch (error) {
       console.error('Error generating grid:', error);
