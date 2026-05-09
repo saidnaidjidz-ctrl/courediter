@@ -50,9 +50,9 @@ export default function AboutScreen() {
           <Ionicons name="heart" size={32} color={COLORS.primaryLight} />
           <Text style={styles.footerTitle}>صُنع بحب وتفاني</Text>
           <Text style={styles.footerCreators}>
-            من تطوير <Text style={styles.creatorName}>د. سعيد</Text> و <Text style={styles.creatorName}>د. ممون</Text>
+            من تطوير <Text style={styles.creatorName}>د. سعيد</Text> و <Text style={styles.creatorName}>د. مامون</Text>
           </Text>
-          <Text style={styles.footerCopyright}>© 2024 جميع الحقوق محفوظة</Text>
+          <Text style={styles.footerCopyright}>© 2026 جميع الحقوق محفوظة</Text>
         </View>
       </View>
 

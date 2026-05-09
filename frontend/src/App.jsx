@@ -288,7 +288,7 @@ function App() {
       <div className="app-footer">
         <div className="footer-content">
           <p className="footer-text">
-            © 2024 Cour Editer. Made by <span className="footer-highlight">Dr. Said</span> & <span className="footer-highlight">Dr. Mamoune</span>
+            © 2026 Cour Editer. Made by <span className="footer-highlight">Dr. Said</span> & <span className="footer-highlight">Dr. Mamoune</span>
           </p>
           <p className="footer-rights">All rights reserved</p>
         </div>
