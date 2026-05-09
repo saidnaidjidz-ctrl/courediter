@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UploadCloud, Settings, Download, RefreshCw } from 'lucide-react';
+import { UploadCloud, Settings, Download, RefreshCw, AlertCircle } from 'lucide-react';
 import './index.css';
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
   const [borderThickness, setBorderThickness] = useState(0.7);
   const [loading, setLoading] = useState(false);
   const [successData, setSuccessData] = useState(null);
+  const [pdfError, setPdfError] = useState(false);
 
   const handleFileUpload = (e) => {
     const uploadedFile = e.target.files[0];
@@ -66,6 +67,7 @@ function App() {
   const handleReset = () => {
     setFile(null);
     setSuccessData(null);
+    setPdfError(false);
     setRows(3);
     setCols(2);
     setBorderThickness(0.7);
@@ -73,8 +75,9 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* Sidebar / Editing Dashboard */}
-      <div className="sidebar">
+      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+        {/* Sidebar / Editing Dashboard */}
+        <div className="sidebar">
         <div className="sidebar-header">
           <Settings size={24} className="upload-icon" />
           <h2>Cour Editer</h2>
@@ -193,12 +196,61 @@ function App() {
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
                 Review your generated PDF layout below
               </p>
-            </div>
-            <iframe 
-              src={successData.download_url} 
-              title="Generated PDF Viewer"
-              width="100%" 
-              style={{ flex: 1, minHeight: '500px', border: '1px solid var(--border)', borderRadius: '8px', backgroundColor: '#fff' }}
+            {pdfError ? (
+              <div style={{ 
+                flex: 1, 
+                display: 'flex', 
+                flexDirection: 'column',
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                border: '1px solid var(--border-color)', 
+                borderRadius: '8px',
+                backgroundColor: '#f0f9ff',
+                gap: '1rem',
+                padding: '2rem'
+              }}>
+                <AlertCircle size={48} color="var(--accent-primary)" />
+                <div style={{ textAlign: 'center' }}>
+                  <p style={{ fontWeight: '500', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>
+                    PDF Preview Not Available
+                  </p>
+                  <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '1rem' }}>
+                    Unable to display PDF in browser. Use the Download button below to view it.
+                  </p>
+                  <button 
+                    className="btn btn-primary"
+                    onClick={() => {
+                      const a = document.createElement('a');
+                      a.href = successData.download_url;
+                      a.download = successData.filename;
+                      a.click();
+                    }}
+                    style={{ marginTop: '0.5rem' }}
+                  >
+                    <Download size={18} /> Download PDF
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <iframe 
+                src={successData.download_url + '#toolbar=1&view=fitH'} 
+                title="Generated PDF Viewer"
+                width="100%" 
+                style={{ 
+                  flex: 1, 
+                  minHeight: '500px', 
+                  border: '1px solid var(--border-color)', 
+                  borderRadius: '8px', 
+                  backgroundColor: '#fff' 
+                }}
+                onError={() => {
+                  setPdfError(true);
+                }}
+                onLoad={() => {
+                  setPdfError(false);
+                }}
+              />
+            )}}}
             />
           </div>
         ) : (
@@ -229,6 +281,17 @@ function App() {
             </div>
           </div>
         )}
+      </div>
+      </div>
+
+      {/* Modern Footer */}
+      <div className="app-footer">
+        <div className="footer-content">
+          <p className="footer-text">
+            © 2024 Cour Editer. Made by <span className="footer-highlight">Dr. Said</span> & <span className="footer-highlight">Dr. Mamoune</span>
+          </p>
+          <p className="footer-rights">All rights reserved</p>
+        </div>
       </div>
     </div>
   );

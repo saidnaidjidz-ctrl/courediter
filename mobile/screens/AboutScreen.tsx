@@ -45,6 +45,17 @@ export default function AboutScreen() {
         </View>
       </View>
 
+      <View style={styles.footerCard}>
+        <View style={styles.footerGradient}>
+          <Ionicons name="heart" size={32} color={COLORS.primaryLight} />
+          <Text style={styles.footerTitle}>صُنع بحب وتفاني</Text>
+          <Text style={styles.footerCreators}>
+            من تطوير <Text style={styles.creatorName}>د. سعيد</Text> و <Text style={styles.creatorName}>د. ممون</Text>
+          </Text>
+          <Text style={styles.footerCopyright}>© 2024 جميع الحقوق محفوظة</Text>
+        </View>
+      </View>
+
     </ScrollView>
   );
 }
@@ -112,5 +123,40 @@ const styles = StyleSheet.create({
     fontSize: FONTS.sizes.md,
     color: COLORS.textPrimary,
     marginRight: SPACING.sm,
+  },
+  footerCard: {
+    backgroundColor: COLORS.surface,
+    borderRadius: RADIUS.lg,
+    overflow: 'hidden',
+    marginBottom: SPACING.lg,
+  },
+  footerGradient: {
+    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+    padding: SPACING.xxl,
+    alignItems: 'center',
+    backgroundColor: COLORS.primary,
+  },
+  footerTitle: {
+    fontSize: FONTS.sizes.lg,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginTop: SPACING.md,
+    marginBottom: SPACING.sm,
+    textAlign: 'center',
+  },
+  footerCreators: {
+    fontSize: FONTS.sizes.md,
+    color: 'rgba(255, 255, 255, 0.9)',
+    textAlign: 'center',
+    marginBottom: SPACING.md,
+  },
+  creatorName: {
+    fontWeight: '700',
+    color: '#fbbf24',
+  },
+  footerCopyright: {
+    fontSize: FONTS.sizes.sm,
+    color: 'rgba(255, 255, 255, 0.8)',
+    textAlign: 'center',
   },
 });
